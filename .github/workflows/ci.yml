@@ -52,11 +52,14 @@ jobs:
       # PASO 2: Configurar el entorno de PHP
       # Laravel 5.8 requiere PHP >= 7.1.3 y funciona idealmente con PHP 7.4.
       # Usamos shivammathur/setup-php para instalar la versión exacta y sus extensiones.
+      # NOTA CLAVE: Paquetes del stack como kylekatarnls/update-helper (dependencia de nesbot/carbon v1)
+      # requieren composer-plugin-api ^1.1.0, por lo que especificamos 'tools: composer:v1'.
       - name: 🐘 Configurar entorno PHP y extensiones
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4' # Versión de PHP compatible con Laravel 5.8
           extensions: mbstring, dom, fileinfo, sqlite3, pdo_sqlite, gd, curl, bcmath, json
+          tools: composer:v1 # Composer 1.x para compatibilidad con plugins legacy
           coverage: none # Desactivamos cobertura para que la ejecución sea ultrarrápida
 
       # PASO 3: Gestión de caché para dependencias de Composer
