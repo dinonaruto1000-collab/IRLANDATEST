@@ -1,0 +1,178 @@
+# ==============================================================================
+# Nombre del Flujo de Trabajo (Workflow)
+# Este nombre aparecerá en la pestaña "Actions" de tu repositorio en GitHub.
+# ==============================================================================
+name: Integración Continua (CI) - DEPORCO
+
+# ==============================================================================
+# Disparadores (Triggers)
+# Define qué eventos en el repositorio iniciarán automáticamente este workflow.
+# ==============================================================================
+on:
+  # Se ejecuta cuando se realiza un "push" (envío de cambios) a las ramas especificadas.
+  push:
+    branches:
+      - main
+      - master
+      - develop
+
+  # Se ejecuta cuando se abre o actualiza una Pull Request hacia las ramas especificadas.
+  # Esto garantiza que ningún código nuevo se fusione (merge) si rompe las pruebas.
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+# ==============================================================================
+# Trabajos (Jobs)
+# Un workflow está compuesto por uno o más "jobs" que pueden ejecutarse en paralelo
+# o en secuencia. Cada job corre en su propia máquina virtual independiente.
+# ==============================================================================
+jobs:
+
+  # ----------------------------------------------------------------------------
+  # TRABAJO 1: Pruebas y Validación del Backend (PHP / Laravel)
+  # ----------------------------------------------------------------------------
+  backend-tests:
+    # Nombre visible del trabajo dentro de GitHub Actions
+    name: Backend - PHP 7.4 & Pruebas PHPUnit
+
+    # Tipo de sistema operativo de la máquina virtual donde se ejecutará el job.
+    # Usamos la última versión estable de Ubuntu disponible en GitHub Runners.
+    runs-on: ubuntu-latest
+
+    # Pasos secuenciales que componen este trabajo
+    steps:
+      # PASO 1: Descargar el código fuente
+      # actions/checkout clona el repositorio dentro del contenedor de ejecución.
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v4
+
+      # PASO 2: Configurar el entorno de PHP
+      # Laravel 5.8 requiere PHP >= 7.1.3 y funciona idealmente con PHP 7.4.
+      # Usamos shivammathur/setup-php para instalar la versión exacta y sus extensiones.
+      - name: 🐘 Configurar entorno PHP y extensiones
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4' # Versión de PHP compatible con Laravel 5.8
+          extensions: mbstring, dom, fileinfo, sqlite3, pdo_sqlite, gd, curl, bcmath, json
+          coverage: none # Desactivamos cobertura para que la ejecución sea ultrarrápida
+
+      # PASO 3: Gestión de caché para dependencias de Composer
+      # Guardar en caché la carpeta de paquetes descargados acelera drásticamente el CI
+      # en ejecuciones consecutivas evitando descargar lo mismo cada vez.
+      - name: 📦 Obtener directorio de caché de Composer
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: ⚡ Restaurar caché de Composer
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      # PASO 4: Preparar archivo de configuración de entorno (.env)
+      # Laravel necesita un archivo .env para leer la configuración de la app y base de datos.
+      - name: ⚙️ Preparar archivo de entorno (.env)
+        run: |
+          # Si no existe .env, copiaremos la plantilla base .env.example
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      # PASO 5: Instalar dependencias de PHP con Composer
+      # Instala las librerías definidas en composer.lock garantizando reproducibilidad exacta.
+      - name: 📥 Instalar dependencias de Composer
+        run: |
+          composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      # PASO 6: Generar clave criptográfica de la aplicación
+      # Requerida por Laravel para encriptación de cookies y sesiones.
+      - name: 🔑 Generar clave de aplicación (APP_KEY)
+        run: php artisan key:generate
+
+      # PASO 7: Configurar permisos de escritura
+      # Laravel requiere permisos de escritura en 'storage' y 'bootstrap/cache'.
+      - name: 🔒 Asignar permisos a carpetas de almacenamiento y caché
+        run: chmod -R 775 storage bootstrap/cache
+
+      # PASO 8: Crear base de datos temporal SQLite para pruebas
+      # SQLite permite ejecutar pruebas en memoria o archivo sin necesidad de levantar MySQL.
+      - name: 🗄️ Crear base de datos SQLite para pruebas
+        run: |
+          mkdir -p database
+          touch database/testing.sqlite
+
+      # PASO 9: Ejecutar migraciones en la base de datos de prueba
+      # Verifica que todos los esquemas de tablas y migraciones de Laravel sean válidos.
+      - name: 🚀 Ejecutar migraciones en base de datos de pruebas
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/testing.sqlite
+        run: php artisan migrate --force
+
+      # PASO 10: Ejecutar la suite de pruebas automatizadas (PHPUnit)
+      # Corre todas las pruebas unitarias (Unit) y de integración/funcionales (Feature).
+      - name: 🧪 Ejecutar pruebas unitarias y funcionales (PHPUnit)
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/testing.sqlite
+          APP_ENV: testing
+        run: vendor/bin/phpunit --colors=always
+
+  # ----------------------------------------------------------------------------
+  # TRABAJO 2: Construcción y Validación del Frontend (Node.js / Laravel Mix)
+  # ----------------------------------------------------------------------------
+  frontend-build:
+    # Nombre visible del trabajo
+    name: Frontend - Compilación de Assets (Node 16 & Mix)
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # PASO 1: Descargar el código
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v4
+
+      # PASO 2: Configurar Node.js
+      # Usamos Node.js versión 16.x ya que Laravel Mix 4 / Webpack 4 tienen
+      # compatibilidad comprobada y evitan errores de OpenSSL introducidos en Node 17+.
+      - name: 🟢 Configurar Node.js (v16.x)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          cache: 'npm' # Habilita caché nativa para dependencias de npm
+
+      # PASO 3: Instalar paquetes de npm
+      # 'npm install' descarga Bootstrap, jQuery, Laravel Mix, Vue, Sass, etc.
+      - name: 📦 Instalar dependencias de Node
+        run: npm install
+
+      # PASO 4: Compilar los assets frontend para producción
+      # Ejecuta Laravel Mix para compilar SCSS a CSS y empaquetar JavaScript.
+      # Si hay algún error tipográfico o de sintaxis en el CSS/JS, este paso fallará.
+      - name: 🏗️ Compilar activos CSS/JS para producción
+        run: npm run production
+
+  # ----------------------------------------------------------------------------
+  # TRABAJO 3: Análisis de Sintaxis y Buenas Prácticas (Linter básico)
+  # ----------------------------------------------------------------------------
+  code-syntax-check:
+    name: Calidad - Verificación de Sintaxis PHP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: 🐘 Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      # PASO: Valida sintaxis con 'php -l' en todos los archivos PHP de la app
+      # Detecta inmediatamente errores de sintaxis (punto y coma faltante, corchetes, etc.)
+      - name: 🔍 Chequear sintaxis de archivos PHP (php -l)
+        run: |
+          find app config routes database -type f -name "*.php" -print0 | xargs -0 -n 1 -P 4 php -l
