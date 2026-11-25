@@ -1,121 +1,132 @@
 @extends('layouts.deporco')
-@section('title','Conocenos')
+@section('title', 'Términos, Condiciones y Políticas del Hotel')
+
 @section('content')
-<section id="about" class="mt-5">
-        <div class="container">
-                <div class="row">                   
-                    <div class="about-content">
+<!-- Header Banner -->
+<section class="py-5" style="background: linear-gradient(rgba(11, 27, 61, 0.8), rgba(11, 27, 61, 0.9)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80') center center / cover no-repeat; color: white;">
+  <div class="container py-5 text-center">
+    <span class="badge badge-warning px-3 py-2 text-uppercase mb-3" style="background: #C5A880; color: #0B1B3D; font-weight: 700; letter-spacing: 1.5px;">Normativa y Transparencia</span>
+    <h1 class="display-4 font-weight-bold text-white mb-3">Políticas de Hospedaje y Términos de Servicio</h1>
+    <p class="lead text-light mx-auto" style="max-width: 720px;">
+      Garantizamos estancias seguras, transparentes y confortables. Conoce los términos, políticas de cancelación y privacidad de DEPORCO Hoteles &amp; Resorts.
+    </p>
+  </div>
+</section>
 
-                        <div class="col-xs-12 col-sm-8 col-md-7 col-lg-6 mx-auto mb-2" id="TerminosYCondiciones">
-                            <a href="{{route('deporco.welcome')}}"><img src="{{url('storage/storage/app/terms.svg')}}" style="display: block;margin: auto;" width="100%" height="auto" alt=""></a>
-                        </div>
-                        <div >
-                            <h2 class="form-title">TÉRMINOS Y CONDICIONES DE USO</h2>
-                                <h3 >INFORMACIÓN RELEVANTE</h3>
-                                <p>
-                                Es requisito necesario para la adquisición de los productos que se ofrecen en este sitio, que lea y acepte los siguientes Términos y Condiciones que a continuación se redactan. El uso de nuestros servicios así como la compra de nuestros productos implicará que usted ha leído y aceptado los Términos y Condiciones de Uso en el presente documento. Todas los productos  que son ofrecidos por nuestro sitio web pudieran ser creadas, cobradas, enviadas o presentadas por una página web tercera y en tal caso estarían sujetas a sus propios Términos y Condiciones. En algunos casos, para adquirir un producto, será necesario el registro por parte del usuario, con ingreso de datos personales fidedignos y definición de una contraseña.
-                                
-                                El usuario puede elegir y cambiar la clave para su acceso de administración de la cuenta en cualquier momento, en caso de que se haya registrado y que sea necesario para la compra de alguno de nuestros productos. deporco.co no asume la responsabilidad en caso de que entregue dicha clave a terceros.
-                                
-                                Todas las compras y transacciones que se lleven a cabo por medio de este sitio web, están sujetas a un proceso de confirmación y verificación, el cual podría incluir la verificación del stock y disponibilidad de producto, validación de la forma de pago, validación de la factura (en caso de existir) y el cumplimiento de las condiciones requeridas por el medio de pago seleccionado. En algunos casos puede que se requiera una verificación por medio de correo electrónico.
-                            
-                                Los precios de los productos ofrecidos en esta Tienda Online es válido solamente en las compras realizadas en este sitio web.
-                                </p>
-                                <br>                                
-
-                                <h3>LICENCIA</h3>                              
-                                <p>
-                                    DEPORCO  a través de su sitio web concede una licencia para que los usuarios utilicen  los productos que son vendidos en este sitio web de acuerdo a los Términos y Condiciones que se describen en este documento.
-                                </p>
-                                <br>
-
-
-
-                                <h3>USO NO AUTORIZADO</h3>    
-                                <p>
-                                    En caso de que aplique (para venta de software, templetes, u otro producto de diseño y programación) usted no puede colocar uno de nuestros productos, modificado o sin modificar, en un CD, sitio web o ningún otro medio y ofrecerlos para la redistribución o la reventa de ningún tipo.
-                                </p>
-                                <br>
-
-
-                                <h3>PROPIEDAD</h3>
-                                <p>
-                                    Usted no puede declarar propiedad intelectual o exclusiva a ninguno de nuestros productos, modificado o sin modificar. Todos los productos son propiedad  de los proveedores del contenido. En caso de que no se especifique lo contrario, nuestros productos se proporcionan  sin ningún tipo de garantía, expresa o implícita. En ningún esta compañía será  responsables de ningún daño incluyendo, pero no limitado a, daños directos, indirectos, especiales, fortuitos o consecuentes u otras pérdidas resultantes del uso o de la imposibilidad de utilizar nuestros productos.
-                                </p>
-                                <br>
-
-
-                                <h3>POLÍTICA DE REEMBOLSO Y GARANTÍA</h3>                                
-                                <p>
-                                    En el caso de productos que sean  mercancías irrevocables no-tangibles, no realizamos reembolsos después de que se envíe el producto, usted tiene la responsabilidad de entender antes de comprarlo.  Le pedimos que lea cuidadosamente antes de comprarlo. Hacemos solamente excepciones con esta regla cuando la descripción no se ajusta al producto. Hay algunos productos que pudieran tener garantía y posibilidad de reembolso pero este será especificado al comprar el producto. En tales casos la garantía solo cubrirá fallas de fábrica y sólo se hará efectiva cuando el producto se haya usado correctamente. La garantía no cubre averías o daños ocasionados por uso indebido. Los términos de la garantía están asociados a fallas de fabricación y funcionamiento en condiciones normales de los productos y sólo se harán efectivos estos términos si el equipo ha sido usado correctamente. Esto incluye:
-                                    
-                                    – De acuerdo a las especificaciones técnicas indicadas para cada producto.
-                                    – En condiciones ambientales acorde con las especificaciones indicadas por el fabricante.
-                                    – En uso específico para la función con que fue diseñado de fábrica.
-                                    – En condiciones de operación eléctricas acorde con las especificaciones y tolerancias indicadas.
-                                </p>
-
-                                <h3>COMPROBACIÓN ANTIFRAUDE</h3>
-                                <p>
-                                    La compra del cliente puede ser aplazada para la comprobación antifraude. También puede ser suspendida por más tiempo para una investigación más rigurosa, para evitar transacciones fraudulentas.
-                                </p>
-                                <br>
-
-
-                                <h3>PRIVACIDAD</h3>
-                                <p>
-                                    Este sitio web deporco.co garantiza que la información personal que usted envía cuenta con la seguridad necesaria. Los datos ingresados por usuario o en el caso de requerir una validación de los pedidos no serán entregados a terceros, salvo que deba ser revelada en cumplimiento a una orden judicial o requerimientos legales.
-                                    
-                                    La suscripción a boletines de correos electrónicos publicitarios es voluntaria y podría ser seleccionada al momento de crear su cuenta.
-                                    
-                                    DEPORCO reserva los derechos de cambiar o de modificar estos términos sin previo aviso.
-                                </p>
-                                <br>                                
-                            </div>
-
-                            <div class="col-xs-12 col-sm-8 col-md-7 col-lg-6 mx-auto mb-2" id="PoliticaDePrivacidad">
-                                    <a href="{{route('deporco.welcome')}}"><img src="{{url('storage/storage/app/privacy.svg')}}" style="display: block;margin: auto;" width="100%" height="auto" alt=""></a>
-                            </div>
-                            <div class="">
-                                    <h2 class="form-title" >POLÍTICA DE PRIVACIDAD</h2>                            
-                                    <p>El presente Política de Privacidad establece los términos en que DEPORCO usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compañía está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo esta Política de Privacidad puede cambiar con el tiempo o ser actualizada por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse que está de acuerdo con dichos cambios.</p>
-                                    <br>                            
-        
-                                    <h3>INFORMACIÓN QUE ES RECOGIDA</h3>
-                                    <p>Nuestro sitio web podrá recoger información personal por ejemplo: Nombre,  información de contacto como  su dirección de correo electrónica e información demográfica. Así mismo cuando sea necesario podrá ser requerida información específica para procesar algún pedido o realizar una entrega o facturación.</p>
-                                    <br>
-        
-                                    <h3>USO DE LA INFORMACIÓN RECOGIDA</h3>                            
-                                    <p>
-                                    Nuestro sitio web emplea la información con el fin de proporcionar el mejor servicio posible, particularmente para mantener un registro de usuarios, de pedidos en caso que aplique, y mejorar nuestros productos y servicios.  Es posible que sean enviados correos electrónicos periódicamente a través de nuestro sitio con ofertas especiales, nuevos productos y otra información publicitaria que consideremos relevante para usted o que pueda brindarle algún beneficio, estos correos electrónicos serán enviados a la dirección que usted proporcione y podrán ser cancelados en cualquier momento.
-                                    
-                                    DEPORCO está altamente comprometido para cumplir con el compromiso de mantener su información segura. Usamos los sistemas más avanzados y los actualizamos constantemente para asegurarnos que no exista ningún acceso no autorizado.
-                                    </p>
-                                    <br>
-        
-                                    <h3>COOKIES</h3>                            
-                                    <p>
-                                    Una cookie se refiere a un fichero que es enviado con la finalidad de solicitar permiso para almacenarse en su ordenador, al aceptar dicho fichero se crea y la cookie sirve entonces para tener información respecto al tráfico web, y también facilita las futuras visitas a una web recurrente. Otra función que tienen las cookies es que con ellas las web pueden reconocerte individualmente y por tanto brindarte el mejor servicio personalizado de su web.
-                                    <br>
-                                    Nuestro sitio web emplea las cookies para poder identificar las páginas que son visitadas y su frecuencia. Esta información es empleada únicamente para análisis estadístico y después la información se elimina de forma permanente. Usted puede eliminar las cookies en cualquier momento desde su ordenador. Sin embargo las cookies ayudan a proporcionar un mejor servicio de los sitios web, estás no dan acceso a información de su ordenador ni de usted, a menos de que usted así lo quiera y la proporcione directamente, visitas a una web . Usted puede aceptar o negar el uso de cookies, sin embargo la mayoría de navegadores aceptan cookies automáticamente pues sirve para tener un mejor servicio web. También usted puede cambiar la configuración de su ordenador para declinar las cookies. Si se declinan es posible que no pueda utilizar algunos de nuestros servicios.
-                                    </p>
-                                    <br>
-        
-                                    <h3>ENLACES A TERCEROS</h3>
-                                    <p>Este sitio web pudiera contener enlaces a otros sitios que pudieran ser de su interés. Una vez que usted de clic en estos enlaces y abandone nuestra página, ya no tenemos control sobre al sitio al que es redirigido y por lo tanto no somos responsables de los términos o privacidad ni de la protección de sus datos en esos otros sitios terceros. Dichos sitios están sujetos a sus propias políticas de privacidad por lo cual es recomendable que los consulte para confirmar que usted está de acuerdo con estas.</p>
-                                    <br>
-                                    
-                                    <h3>CONTROL DE SU INFORMACIÓN PERSONAL</h3>
-                                    <p>
-                                    En cualquier momento usted puede restringir la recopilación o el uso de la información personal que es proporcionada a nuestro sitio web.  Cada vez que se le solicite rellenar un formulario, como el de alta de usuario, puede marcar o desmarcar la opción de recibir información por correo electrónico.  En caso de que haya marcado la opción de recibir nuestro boletín o publicidad usted puede cancelarla en cualquier momento.
-                                    Esta compañía no venderá, cederá ni distribuirá la información personal que es recopilada sin su consentimiento, salvo que sea requerido por un juez con un orden judicial.                           
-                                    DEPORCO Se reserva el derecho de cambiar los términos de la presente Política de Privacidad en cualquier momento.
-                                    </p>
-                                    <br>
-                            </div>
-                            </div>
-
-                </div>
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row">
+      <!-- Sidebar Navigation for terms -->
+      <div class="col-lg-4 mb-4">
+        <div class="card border-0 shadow-sm p-4 rounded-lg sticky-top" style="top: 110px;">
+          <h5 class="font-weight-bold mb-3" style="color: #0B1B3D;"><i class="fas fa-list-ul mr-2 text-warning"></i> Índice de Políticas</h5>
+          <div class="list-group list-group-flush">
+            <a href="#TerminosYCondiciones" class="list-group-item list-group-item-action border-0 px-0 py-2 font-weight-bold text-dark">
+              1. Términos de Reserva y Pago
+            </a>
+            <a href="#HorariosEstancia" class="list-group-item list-group-item-action border-0 px-0 py-2 font-weight-bold text-dark">
+              2. Horarios de Check-In y Check-Out
+            </a>
+            <a href="#PoliticaDeCancelacion" class="list-group-item list-group-item-action border-0 px-0 py-2 font-weight-bold text-dark">
+              3. Cancelación Flexible y Reembolsos
+            </a>
+            <a href="#NormasConvivencia" class="list-group-item list-group-item-action border-0 px-0 py-2 font-weight-bold text-dark">
+              4. Normas de Convivencia y Mascotas
+            </a>
+            <a href="#PoliticaDePrivacidad" class="list-group-item list-group-item-action border-0 px-0 py-2 font-weight-bold text-dark">
+              5. Privacidad y Protección de Datos
+            </a>
+          </div>
         </div>
+      </div>
+
+      <!-- Content -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm p-4 p-md-5 rounded-lg bg-white">
+          
+          <!-- 1. Terms -->
+          <div id="TerminosYCondiciones" class="mb-5">
+            <h3 class="font-weight-bold mb-3" style="color: #0B1B3D;">1. TÉRMINOS DE RESERVA Y PAGO</h3>
+            <p class="text-muted leading-relaxed">
+              Al realizar una reserva en cualquier propiedad o mediante el sitio web oficial de <strong>DEPORCO Hoteles &amp; Resorts</strong>, el huésped acepta expresamente los términos y condiciones aquí contemplados.
+            </p>
+            <ul class="text-muted leading-relaxed">
+              <li>Para confirmar su reserva es necesario proveer una tarjeta de crédito o comprobante de pago válido que garantice la estancia.</li>
+              <li>Las tarifas mostradas incluyen impuestos locales aplicables y desayuno buffet gourmet (salvo que la tarifa promocional indique lo contrario).</li>
+              <li>Los huéspedes deben presentar un documento de identidad oficial vigente (Cédula o Pasaporte) al momento del registro en recepción.</li>
+            </ul>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- 2. Check-in / Check-out -->
+          <div id="HorariosEstancia" class="mb-5">
+            <h3 class="font-weight-bold mb-3" style="color: #0B1B3D;">2. HORARIOS DE CHECK-IN Y CHECK-OUT</h3>
+            <div class="row my-3">
+              <div class="col-sm-6 mb-2">
+                <div class="p-3 rounded bg-light border-left" style="border-left: 4px solid #C5A880 !important;">
+                  <span class="text-muted small text-uppercase font-weight-bold">Hora de Entrada</span>
+                  <h5 class="mb-0 font-weight-bold" style="color: #0B1B3D;">Check-In: 15:00 hrs</h5>
+                </div>
+              </div>
+              <div class="col-sm-6 mb-2">
+                <div class="p-3 rounded bg-light border-left" style="border-left: 4px solid #0B1B3D !important;">
+                  <span class="text-muted small text-uppercase font-weight-bold">Hora de Salida</span>
+                  <h5 class="mb-0 font-weight-bold" style="color: #0B1B3D;">Check-Out: 12:00 hrs</h5>
+                </div>
+              </div>
+            </div>
+            <p class="text-muted leading-relaxed">
+              Si requiere un registro anticipado (<em>Early Check-in</em>) o una salida posterior (<em>Late Check-out</em>), favor de consultar con el equipo de recepción o concierge. Sujeto a disponibilidad y posibles tarifas adicionales.
+            </p>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- 3. Cancellation Policy -->
+          <div id="PoliticaDeCancelacion" class="mb-5">
+            <h3 class="font-weight-bold mb-3" style="color: #0B1B3D;">3. POLÍTICA DE CANCELACIÓN Y REEMBOLSO</h3>
+            <p class="text-muted leading-relaxed">
+              En DEPORCO entendemos que los planes pueden cambiar. Por ello, brindamos opciones de reserva con flexibilidad garantizada:
+            </p>
+            <ul class="text-muted leading-relaxed">
+              <li><strong>Cancelación Gratuita:</strong> Puede cancelar o modificar su reserva sin penalización hasta 48 horas antes de la fecha de entrada (check-in).</li>
+              <li><strong>Cancelación Tardía o No-Show:</strong> Si la cancelación se realiza con menos de 48 horas de antelación o el huésped no se presenta al hotel, se cargará el equivalente a la primera noche de estancia.</li>
+              <li><strong>Tarifas No Reembolsables:</strong> Ciertas promociones de venta anticipada de alta temporada no admiten reembolso, lo cual se especifica de forma clara al momento de la compra.</li>
+            </ul>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- 4. Norms & Pets -->
+          <div id="NormasConvivencia" class="mb-5">
+            <h3 class="font-weight-bold mb-3" style="color: #0B1B3D;">4. NORMAS DE CONVIVENCIA Y MASCOTAS</h3>
+            <p class="text-muted leading-relaxed">
+              Para garantizar el descanso pacífico de todos nuestros visitantes:
+            </p>
+            <ul class="text-muted leading-relaxed">
+              <li>Se solicita mantener un volumen moderado en áreas comunes y pasillos de habitaciones a partir de las 22:00 hrs.</li>
+              <li>Todas nuestras habitaciones son 100% libres de humo de tabaco. Fumar en la habitación genera un cargo de desodorización e higienización.</li>
+              <li><strong>Programa Pet-Friendly:</strong> Aceptamos mascotas de raza pequeña o mediana en suites designadas. Aplican normas de cuidado y cargo por limpieza profunda.</li>
+            </ul>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- 5. Privacy Policy -->
+          <div id="PoliticaDePrivacidad" class="mb-3">
+            <h3 class="font-weight-bold mb-3" style="color: #0B1B3D;">5. PRIVACIDAD Y PROTECCIÓN DE DATOS</h3>
+            <p class="text-muted leading-relaxed">
+              <strong>DEPORCO Hoteles &amp; Resorts</strong> se compromete a salvaguardar rigurosamente la privacidad de sus huéspedes. La información personal solicitada (nombres, teléfonos, documentos y datos de facturación) se utiliza con el fin exclusivo de gestionar su estancia, coordinar servicios adicionales y brindar una experiencia personalizada.
+            </p>
+            <p class="text-muted leading-relaxed">
+              En ningún caso comercializamos ni transferimos sus datos personales a terceros no autorizados. Implementamos cifrado SSL en todas las transacciones web para una reserva totalmente segura.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 @endsection

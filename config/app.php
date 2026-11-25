@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Deportes Cotecnova'),
+    'name' => env('APP_NAME', 'DEPORCO Hoteles & Resorts'),
 
     /*
     |--------------------------------------------------------------------------

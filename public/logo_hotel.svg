@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="420" height="80">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2C99B" />
+      <stop offset="50%" stop-color="#C5A880" />
+      <stop offset="100%" stop-color="#9C7944" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E244D" />
+      <stop offset="100%" stop-color="#07142E" />
+    </linearGradient>
+  </defs>
+
+  <!-- Hotel Monogram Crest -->
+  <g transform="translate(10, 8)">
+    <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#blueGrad)" stroke="url(#goldGrad)" stroke-width="2"/>
+    <!-- Crown / Roof Crest -->
+    <path d="M18 24 L32 14 L46 24 L42 27 L32 20 L22 27 Z" fill="url(#goldGrad)" />
+    <!-- Luxury Hotel Column & Arch -->
+    <path d="M22 29 H42 V32 H22 Z" fill="url(#goldGrad)" />
+    <path d="M24 33 H28 V47 H24 Z" fill="url(#goldGrad)" />
+    <path d="M30 33 H34 V47 H30 Z" fill="url(#goldGrad)" />
+    <path d="M36 33 H40 V47 H36 Z" fill="url(#goldGrad)" />
+    <path d="M20 48 H44 V51 H20 Z" fill="url(#goldGrad)" />
+    <!-- 5 Stars inside crest -->
+    <circle cx="24" cy="20" r="1.5" fill="#FFF" />
+    <circle cx="28" cy="18" r="1.5" fill="#FFF" />
+    <circle cx="32" cy="16.5" r="1.8" fill="#FFF" />
+    <circle cx="36" cy="18" r="1.5" fill="#FFF" />
+    <circle cx="40" cy="20" r="1.5" fill="#FFF" />
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(86, 12)">
+    <!-- Hotel Name -->
+    <text x="0" y="32" font-family="'Montserrat', 'Cinzel', 'Playfair Display', sans-serif" font-size="28" font-weight="800" letter-spacing="3" fill="#0B1B3D">
+      DEPORCO
+    </text>
+    <!-- Subtitle -->
+    <text x="2" y="52" font-family="'Open Sans', 'Montserrat', sans-serif" font-size="11" font-weight="600" letter-spacing="4.5" fill="#C5A880">
+      HOTELS &amp; RESORTS
+    </text>
+    <!-- 5 Stars Icon Strip -->
+    <g transform="translate(230, 21)" fill="url(#goldGrad)">
+      <polygon points="6,0 7.8,4.2 12,4.6 8.8,7.5 9.7,12 6,9.8 2.3,12 3.2,7.5 0,4.6 4.2,4.2"/>
+      <polygon points="20,0 21.8,4.2 26,4.6 22.8,7.5 23.7,12 20,9.8 16.3,12 17.2,7.5 14,4.6 18.2,4.2"/>
+      <polygon points="34,0 35.8,4.2 40,4.6 36.8,7.5 37.7,12 34,9.8 30.3,12 31.2,7.5 28,4.6 32.2,4.2"/>
+      <polygon points="48,0 49.8,4.2 54,4.6 50.8,7.5 51.7,12 48,9.8 44.3,12 45.2,7.5 42,4.6 46.2,4.2"/>
+      <polygon points="62,0 63.8,4.2 68,4.6 64.8,7.5 65.7,12 62,9.8 58.3,12 59.2,7.5 56,4.6 60.2,4.2"/>
+    </g>
+  </g>
+</svg>
