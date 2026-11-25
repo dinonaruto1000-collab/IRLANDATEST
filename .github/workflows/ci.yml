@@ -79,10 +79,20 @@ jobs:
 
       # PASO 4: Preparar archivo de configuración de entorno (.env)
       # Laravel necesita un archivo .env para leer la configuración de la app y base de datos.
-      - name: ⚙️ Preparar archivo de entorno (.env)
+      # IMPORTANTE: El .env.example viene con DB_CONNECTION=mysql apuntando a 127.0.0.1:3306.
+      # Como en el runner de CI no hay MySQL disponible, sobreescribimos la conexión a SQLite
+      # para que Laravel no intente conectarse a MySQL al arrancar (key:generate, migrate, etc.).
+      - name: ⚙️ Preparar archivo de entorno (.env) con SQLite para CI
         run: |
-          # Si no existe .env, copiaremos la plantilla base .env.example
+          # Copiamos la plantilla base .env.example como .env
           php -r "file_exists('.env') || copy('.env.example', '.env');"
+          # Reemplazamos la configuración de MySQL por SQLite para evitar "Connection refused"
+          sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/' .env
+          sed -i 's/DB_HOST=127.0.0.1/#DB_HOST=127.0.0.1/' .env
+          sed -i 's/DB_PORT=3306/#DB_PORT=3306/' .env
+          sed -i 's/DB_DATABASE=torneo/DB_DATABASE=database\/testing.sqlite/' .env
+          sed -i 's/DB_USERNAME=root/#DB_USERNAME=root/' .env
+          sed -i 's/DB_PASSWORD=/#DB_PASSWORD=/' .env
 
       # PASO 5: Instalar dependencias de PHP con Composer
       # Instala las librerías definidas en composer.lock garantizando reproducibilidad exacta.
@@ -90,22 +100,24 @@ jobs:
         run: |
           composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      # PASO 6: Generar clave criptográfica de la aplicación
-      # Requerida por Laravel para encriptación de cookies y sesiones.
-      - name: 🔑 Generar clave de aplicación (APP_KEY)
-        run: php artisan key:generate
-
-      # PASO 7: Configurar permisos de escritura
-      # Laravel requiere permisos de escritura en 'storage' y 'bootstrap/cache'.
-      - name: 🔒 Asignar permisos a carpetas de almacenamiento y caché
-        run: chmod -R 775 storage bootstrap/cache
-
-      # PASO 8: Crear base de datos temporal SQLite para pruebas
-      # SQLite permite ejecutar pruebas en memoria o archivo sin necesidad de levantar MySQL.
+      # PASO 6: Crear base de datos temporal SQLite para pruebas
+      # SQLite permite ejecutar pruebas sin necesidad de levantar un servidor MySQL.
+      # Se crea ANTES de key:generate para que Laravel pueda arrancar sin error de conexión.
       - name: 🗄️ Crear base de datos SQLite para pruebas
         run: |
           mkdir -p database
           touch database/testing.sqlite
+
+      # PASO 7: Generar clave criptográfica de la aplicación
+      # Requerida por Laravel para encriptación de cookies y sesiones.
+      # Ahora que .env apunta a SQLite y el archivo de BD existe, Laravel arranca sin problemas.
+      - name: 🔑 Generar clave de aplicación (APP_KEY)
+        run: php artisan key:generate
+
+      # PASO 8: Configurar permisos de escritura
+      # Laravel requiere permisos de escritura en 'storage' y 'bootstrap/cache'.
+      - name: 🔒 Asignar permisos a carpetas de almacenamiento y caché
+        run: chmod -R 775 storage bootstrap/cache
 
       # PASO 9: Ejecutar migraciones en la base de datos de prueba
       # Verifica que todos los esquemas de tablas y migraciones de Laravel sean válidos.
