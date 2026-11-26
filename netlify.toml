@@ -1,0 +1,27 @@
+# =============================================================================
+# Configuración de Netlify para DEPORCO
+# Este archivo le indica a Netlify cómo publicar el sitio estático del proyecto.
+# Se ubica en la raíz del repositorio y es leído automáticamente al hacer deploy.
+# =============================================================================
+
+[build]
+  # Carpeta raíz donde Netlify busca el sitio a publicar.
+  # La landing page estática del proyecto (index.html) se encuentra en docs/.
+  publish = "docs"
+
+  # No se necesita ningún comando de build porque el sitio es HTML estático puro.
+  # Si en el futuro se agrega un proceso de compilación (ej: npm run build),
+  # se definiría aquí: command = "npm run build"
+  command = ""
+
+# =============================================================================
+# Reglas de redirección (Redirects)
+# Netlify sirve archivos estáticos directamente. Si alguien accede a la raíz
+# del dominio, Netlify entregará docs/index.html automáticamente.
+# La siguiente regla asegura que cualquier ruta desconocida vuelva al index,
+# útil si en el futuro se agrega navegación SPA.
+# =============================================================================
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200
